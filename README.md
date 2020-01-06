@@ -175,6 +175,8 @@ const putHandler = async (event: APIGatewayProxyEvent, context: Context): Promis
 1. Events are published by the [EventPublisher](https://github.com/dlydiard/ddd-cqrs-es-aws-sam/blob/master/src/event-store/publisher/event-publisher.interface.ts) into a DynamoDB Event Log.
 2. The Event Log DynamoDB Stream is then streamed to a Kinesis Stream via the [DynamoDB Kinesis Stream Adaptor](https://github.com/dlydiard/ddd-cqrs-es-aws-sam/blob/master/src/event-store/dynamo-kinesis-adaptor.ts).
 3. Kinesis Stream events are then brokered (fan-out) to SQS FIFO Queues via the [Event Source Broker](https://github.com/dlydiard/ddd-cqrs-es-aws-sam/blob/master/src/event-store/brokers/event-source-broker.ts) per Aggregate Root type.
+SQS Queues are targeted by naming convention based on the Event name.
+Example: `org/iam/user/registered => IamUserQueue => https://sqs.us-west-2.amazonaws.com/1234567890/stack-name-IamUserQueue-3QSK4XVJLBU6A.fifo`
 4. Events on each SQS Queue are then brokered via the [Queue Broker](https://github.com/dlydiard/ddd-cqrs-es-aws-sam/blob/master/src/event-store/brokers/queue-broker.ts) to all registered Event handlers for that Event type.
 
 **Example of publishing and handling events:**
