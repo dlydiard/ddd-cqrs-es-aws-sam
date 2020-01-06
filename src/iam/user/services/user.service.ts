@@ -26,7 +26,7 @@ import { UserUpdatedEnricher } from '../events/user-updated.enricher';
 import { User } from '../models/user';
 
 @injectable()
-export class UserService {
+export class UserService implements Service<User> {
   constructor (
     @inject(DynamoEventPublisher)
     private readonly eventPublisher: EventPublisher,
