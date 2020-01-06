@@ -3,7 +3,7 @@ Comprehensive [Domain Driven Design](https://github.com/heynickc/awesome-ddd), [
 
 ## Features
 * Cloud native microservices using [serverless](https://aws.amazon.com/serverless/) architecture
-* [AWS CodeStar](https://aws.amazon.com/codestar/) compatible for CI/CD
+* [AWS CodeStar](https://aws.amazon.com/codestar/) (CodeBuild/CodePipeline) compatible for CI/CD
 * Typescript [building and debugging](https://github.com/SnappyTutorials/aws-sam-webpack-plugin#readme) of Lambda functions
 * Domain Driven Design using [node-ts/ddd](https://github.com/node-ts/ddd)
 * Decoupled architecture
@@ -58,7 +58,7 @@ npm run deploy
 **Notes**:
 * In order for Lambda functions to talk to various AWS services while running locally, you must deploy this application so those services exist.
 Once AWS SAM and [localstack](https://github.com/localstack/localstack) are [compatible](https://github.com/localstack/localstack/issues/1783), an abstraction layer for the AWS SDK needs to be created to communicate with local services ([issue #7](https://github.com/dlydiard/ddd-cqrs-es-aws-sam/issues/7)) and this step can be skipped.
-* This project currently **does not** include a CodeStar CloudFormation template ([issue #15](https://github.com/dlydiard/ddd-cqrs-es-aws-sam/issues/15)).
+* This project currently **does not** include a CodeStar (CodeBuild/CodePipeline) CloudFormation template ([issue #15](https://github.com/dlydiard/ddd-cqrs-es-aws-sam/issues/15)).
 * Using an AWS sandbox account is highly recommended.
 
 
