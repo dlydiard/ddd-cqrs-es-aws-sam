@@ -1,0 +1,465 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: "AWS::Serverless-2016-10-31"
+
+Parameters:
+  environment:
+    Type: String
+    Default: development
+  logLevel:
+    Type: String
+    Default: debug
+    AllowedValues:
+      - debug
+      - info
+      - warn
+      - error
+  stage:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - stage
+      - prod
+  eventLogTable:
+    Type: String
+  eventStream:
+    Type: String
+  setValidationsTable:
+    Type: String
+  projectionUsersTable:
+    Type: String
+  projectionRolesTable:
+    Type: String
+
+Globals:
+  Function:
+    Runtime: nodejs12.x
+    MemorySize: 512
+    Timeout: 30
+    Tags:
+      Application: Serverless API Demo
+    Environment:
+      Variables:
+        environment: !Ref environment
+        logLevel: !Ref logLevel
+        stage: !Ref stage
+        eventSourceLog: !Ref eventLogTable
+        eventSourceStream: !Ref eventStream
+        setValidationsTable: !Ref setValidationsTable
+        projectionUsersTable: !Ref projectionUsersTable
+        projectionRolesTable: !Ref projectionRolesTable
+
+Resources:
+  # API Gateway
+  ServerlessSamApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref stage
+      Cors:
+        AllowMethods: "'GET,POST,PUT,PATCH,DELETE,OPTIONS'"
+        AllowHeaders: "'authorization'"
+        AllowOrigin: "'*'"
+      OpenApiVersion: '3.0'
+
+  ###
+  ### /users endpoints
+  ###
+
+  # GET /users
+  ListUsersController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: user-controller.listHandler
+      CodeUri: src/iam/user/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref projectionUsersTable
+      Events:
+        UserApi:
+          Type: Api
+          Properties:
+            Path: /users
+            Method: GET
+            RestApiId: !Ref ServerlessSamApi
+
+  # GET /users/{id}
+  GetUserController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: user-controller.getHandler
+      CodeUri: src/iam/user/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref projectionUsersTable
+      Events:
+        UserApi:
+          Type: Api
+          Properties:
+            Path: /users/{id}
+            Method: GET
+            RestApiId: !Ref ServerlessSamApi
+
+  # POST /users
+  CreateUserController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: user-controller.postHandler
+      CodeUri: src/iam/user/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref eventLogTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref setValidationsTable
+      Events:
+        UserApi:
+          Type: Api
+          Properties:
+            Path: /users
+            Method: POST
+            RestApiId: !Ref ServerlessSamApi
+
+  # PUT /users/{id}
+  UpdateUserController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: user-controller.putHandler
+      CodeUri: src/iam/user/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref eventLogTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref setValidationsTable
+      Events:
+        UserApi:
+          Type: Api
+          Properties:
+            Path: /users/{id}
+            Method: PUT
+            RestApiId: !Ref ServerlessSamApi
+
+  # PUT /users/{id}/disable
+  DisableUserController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: user-controller.disableHandler
+      CodeUri: src/iam/user/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref eventLogTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref setValidationsTable
+      Events:
+        UserApi:
+          Type: Api
+          Properties:
+            Path: /users/{id}/disable
+            Method: PUT
+            RestApiId: !Ref ServerlessSamApi
+
+  # POST /users/{id}/roles
+  AddUserRoleController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: user-controller.addRoleHandler
+      CodeUri: src/iam/user/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref eventLogTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref setValidationsTable
+      Events:
+        UserApi:
+          Type: Api
+          Properties:
+            Path: /users/{id}/roles
+            Method: POST
+            RestApiId: !Ref ServerlessSamApi
+
+  # DELETE /users/{id}/roles/{roleId}
+  RemoveUserRoleController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: user-controller.removeRoleHandler
+      CodeUri: src/iam/user/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref eventLogTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref setValidationsTable
+      Events:
+        UserApi:
+          Type: Api
+          Properties:
+            Path: /users/{id}/roles/{roleId}
+            Method: DELETE
+            RestApiId: !Ref ServerlessSamApi
+
+
+  ###
+  ### /roles endpoints
+  ###
+
+  # GET /roles
+  ListRolesController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: role-controller.listHandler
+      CodeUri: src/iam/role/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref projectionRolesTable
+      Events:
+        RoleApi:
+          Type: Api
+          Properties:
+            Path: /roles
+            Method: GET
+            RestApiId: !Ref ServerlessSamApi
+
+  # GET /roles/{id}
+  GetRoleController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: role-controller.getHandler
+      CodeUri: src/iam/role/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref projectionRolesTable
+      Events:
+        RoleApi:
+          Type: Api
+          Properties:
+            Path: /roles/{id}
+            Method: GET
+            RestApiId: !Ref ServerlessSamApi
+
+  # POST /roles
+  CreateRoleController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: role-controller.postHandler
+      CodeUri: src/iam/role/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref eventLogTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref setValidationsTable
+      Events:
+        RoleApi:
+          Type: Api
+          Properties:
+            Path: /roles
+            Method: POST
+            RestApiId: !Ref ServerlessSamApi
+
+  # PUT /roles/{id}/disable
+  DisableRoleController:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: role-controller.disableHandler
+      CodeUri: src/iam/role/controllers
+      AutoPublishAlias: live
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref eventLogTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref setValidationsTable
+      Events:
+        RoleApi:
+          Type: Api
+          Properties:
+            Path: /roles/{id}/disable
+            Method: PUT
+            RestApiId: !Ref ServerlessSamApi
+
+  # Append only Dynamo table
+  EventLog:
+    Type: "AWS::DynamoDB::Table"
+    Properties:
+      TableName: !Ref eventLogTable
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: $version
+          AttributeType: N
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: $version
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
+
+  # Table for Set Validations
+  SetValidations:
+    Type: "AWS::Serverless::SimpleTable"
+    Properties:
+      TableName: !Ref setValidationsTable
+      PrimaryKey:
+        Name: constraint
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  # User Projection
+  ProjectionUsers:
+    Type: "AWS::Serverless::SimpleTable"
+    Properties:
+      TableName: !Ref projectionUsersTable
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  # Role Projection
+  ProjectionRoles:
+    Type: "AWS::Serverless::SimpleTable"
+    Properties:
+      TableName: !Ref projectionRolesTable
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  # Stream Dynamo insert events to Kinesis stream
+  DynamoKinesisAdaptor:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dynamo-kinesis-adaptor.handler
+      CodeUri: src/event-store/
+      Policies:
+        - DynamoDBStreamReadPolicy:
+            TableName: !Ref eventLogTable
+            StreamName: !Select [2, !Split ["/", !GetAtt EventLog.StreamArn]]
+        - KinesisCrudPolicy:
+            StreamName: !Ref eventStream
+      AutoPublishAlias: live
+      Events:
+        Stream:
+          Type: DynamoDB
+          Properties:
+            Stream: !GetAtt EventLog.StreamArn
+            BatchSize: 100
+            StartingPosition: LATEST
+
+  # Kinesis Stream with EventSource Lambda broker
+  EventSourceStream:
+    Type: AWS::Kinesis::Stream
+    Properties:
+      Name: !Ref eventStream
+      ShardCount: 1
+      # TODO: Firehose => S3 Backup of stream
+
+  StreamConsumer:
+    Type: "AWS::Kinesis::StreamConsumer"
+    Properties:
+      StreamARN: !GetAtt EventSourceStream.Arn
+      ConsumerName: !Ref EventBroker
+
+  EventBroker:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: event-source-broker.handler
+      CodeUri: src/event-store/brokers/
+      AutoPublishAlias: live
+      Policies:
+        - KinesisStreamReadPolicy:
+            StreamName: !Ref eventStream
+        - SQSSendMessagePolicy:
+            QueueName: !GetAtt IamUserQueue.QueueName
+        - SQSSendMessagePolicy:
+            QueueName: !GetAtt IamRoleQueue.QueueName
+        - Statement:
+          - Action:
+            - sqs:ListQueues
+            Effect: Allow
+            Resource: "arn:aws:sqs:*"
+      Events:
+        Stream:
+          Type: Kinesis
+          Properties:
+            Stream: !GetAtt StreamConsumer.ConsumerARN
+            StartingPosition: LATEST
+            BatchSize: 100
+
+  # Create Queue and handler Lambda for each aggregate. These handlers will create the projections.
+  IamUserQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      FifoQueue: true
+  IamRoleQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      FifoQueue: true
+
+  # User queue processor
+  IamUserQueueProcessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: queue-broker.handler
+      CodeUri: src/event-store/brokers/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref projectionUsersTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref projectionRolesTable
+      AutoPublishAlias: live
+      Events:
+        IamUserQueueEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt IamUserQueue.Arn
+            BatchSize: 10
+
+  # Role queue processor
+  IamRoleQueueProcessor:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: queue-broker.handler
+      CodeUri: src/event-store/brokers/
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref projectionRolesTable
+        - DynamoDBCrudPolicy:
+            TableName: !Ref projectionUsersTable
+      AutoPublishAlias: live
+      Events:
+        IamRolesQueueEvent:
+          Type: SQS
+          Properties:
+            Queue: !GetAtt IamRoleQueue.Arn
+            BatchSize: 10
+
+Outputs:
+  ApiUrl:
+    Description: The target URL of the created API
+    Value: !Sub "https://${ServerlessSamApi}.execute-api.${AWS::Region}.amazonaws.com/${stage}/"
+    Export:
+      Name: !Sub "${stage}-api-url"
+  EventLogARN:
+    Description: "Event Log ARN"
+    Value: !GetAtt EventLog.Arn
+  EventLogStreamARN:
+    Description: "Event Log Streamn ARN"
+    Value: !GetAtt EventLog.StreamArn
+  EventSourceStreamARN:
+    Description: "Event Source Stream ARN"
+    Value: !GetAtt EventSourceStream.Arn
+  IamUserQueueARN:
+    Description: "Iam User Queue ARN"
+    Value: !GetAtt IamUserQueue.Arn
+  IamRoleQueueARN:
+    Description: "Iam Role Queue ARN"
+    Value: !GetAtt IamRoleQueue.Arn

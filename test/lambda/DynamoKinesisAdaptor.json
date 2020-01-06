@@ -1,0 +1,108 @@
+{
+  "Records": [
+    {
+      "eventID": "d2941cf5e273e0e76f9798befc043b91",
+      "eventName": "INSERT",
+      "eventVersion": "1.1",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-west-2",
+      "dynamodb": {
+        "ApproximateCreationDateTime": 1577152756,
+        "Keys": {
+          "id": {
+            "S": "645bb243-73e6-4ffc-b660-67faff66b928"
+          },
+          "$version": {
+            "N": "1"
+          }
+        },
+        "NewImage": {
+          "$version": {
+            "N": "1"
+          },
+          "event": {
+            "M": {
+              "$name": {
+                "S": "org/iam/user/registered"
+              },
+              "$version": {
+                "N": "1"
+              },
+              "email": {
+                "S": "dan@domain.com"
+              },
+              "id": {
+                "S": "645bb243-73e6-4ffc-b660-67faff66b927"
+              },
+              "timestamp": {
+                "S": "2019-12-30T22:33:01.788Z"
+              }
+            }
+          },
+          "id": {
+            "S": "645bb243-73e6-4ffc-b660-67faff66b927"
+          },
+          "timestamp": {
+            "S": "2019-12-30T22:33:01.788Z"
+          }
+        },
+        "SequenceNumber": "200000000009677037452",
+        "SizeBytes": 149,
+        "StreamViewType": "NEW_IMAGE"
+      },
+      "eventSourceARN": "arn:aws:dynamodb:us-west-2:00000000:table/EventLog/stream/2019-12-23T22:37:03.869"
+    },
+       {
+      "eventID": "690781ceb70a47316e8745e558310072",
+      "eventName": "MODIFY",
+      "eventVersion": "1.1",
+      "eventSource": "aws:dynamodb",
+      "awsRegion": "us-west-2",
+      "dynamodb": {
+        "ApproximateCreationDateTime": 1577160292,
+        "Keys": {
+          "id": {
+            "S": "745bb243-73e6-4ffc-b660-67faff66b928"
+          },
+          "$version": {
+            "N": "1"
+          }
+        },
+        "NewImage": {
+          "$version": {
+            "N": "1"
+          },
+          "event": {
+            "M": {
+              "$name": {
+                "S": "org/iam/user/registered"
+              },
+              "$version": {
+                "N": "1"
+              },
+              "email": {
+                "S": "dan2@domain.com"
+              },
+              "id": {
+                "S": "745bb243-73e6-4ffc-b660-67faff66b927"
+              },
+              "timestamp": {
+                "S": "2019-12-30T22:33:01.788Z"
+              }
+            }
+          },
+          "id": {
+            "S": "745bb243-73e6-4ffc-b660-67faff66b927"
+          },
+          "timestamp": {
+            "S": "2019-12-30T22:33:02.788Z"
+          }
+        },
+        "SequenceNumber": "804900000000051704945059",
+        "SizeBytes": 182,
+        "StreamViewType": "NEW_IMAGE"
+      },
+      "eventSourceARN": "arn:aws:dynamodb:us-west-2:00000000:table/EventLog/stream/2019-12-23T22:37:03.869"
+    }
+  ]
+}

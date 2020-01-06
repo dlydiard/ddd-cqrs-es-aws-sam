@@ -1,0 +1,349 @@
+{
+	"info": {
+		"_postman_id": "6bbb8271-355e-4b62-aaf3-0cf29d94e5a7",
+		"name": "ddd-cqrs-es-sam",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "/users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/users?contains=email:com&limit=10",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "contains",
+									"value": "email:com"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/users/645bb243-73e6-4ffc-b660-67faff66b928",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"645bb243-73e6-4ffc-b660-67faff66b928"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"645bb243-73e6-4ffc-b660-67faff66b928\",\n\t\"email\": \"dan@domain.com\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/user/{id}/roles",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"roleId\": \"145bb243-73e6-4ffc-b660-67faff66b928\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/645bb243-73e6-4ffc-b660-67faff66b928/roles",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"645bb243-73e6-4ffc-b660-67faff66b928",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{id}/roles/{roleId}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/645bb243-73e6-4ffc-b660-67faff66b928/roles/145bb243-73e6-4ffc-b660-67faff66b928",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"645bb243-73e6-4ffc-b660-67faff66b928",
+								"roles",
+								"145bb243-73e6-4ffc-b660-67faff66b928"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{id}/disable",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"FirstThree\",\n\t\"lastName\": \"LastThree\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/645bb243-73e6-4ffc-b660-67faff66b928/disable",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"645bb243-73e6-4ffc-b660-67faff66b928",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"firstName\": \"NewFirstName\",\n\t\"lastName\": \"NewLastName\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/users/645bb243-73e6-4ffc-b660-67faff66b928",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"users",
+								"645bb243-73e6-4ffc-b660-67faff66b928"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "roles",
+			"item": [
+				{
+					"name": "/roles/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/roles/145bb243-73e6-4ffc-b660-67faff66b928",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"roles",
+								"145bb243-73e6-4ffc-b660-67faff66b928"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/roles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/roles?limit=10",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"roles"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/roles",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\": \"145bb243-73e6-4ffc-b660-67faff66b928\",\n\t\"name\": \"Admin\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/roles",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/roles/{id}/disable",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/roles/145bb243-73e6-4ffc-b660-67faff66b928/disable",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"roles",
+								"145bb243-73e6-4ffc-b660-67faff66b928",
+								"disable"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

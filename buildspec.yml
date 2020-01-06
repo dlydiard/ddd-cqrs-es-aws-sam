@@ -1,0 +1,55 @@
+version: 0.2
+
+env:
+  variables:
+    environment: production
+    logLevel: error
+    stage: prod
+    eventLogTable: EventLog
+    eventStream: event-source-stream
+    setValidationsTable: set-validations
+    projectionUsersTable: projection-user
+    projectionRolesTable: projection-roles
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+    commands:
+      # Install SAM
+      - pip install --user aws-sam-cli
+      - USER_BASE_PATH=$(python -m site --user-base)
+      - export PATH=$PATH:$USER_BASE_PATH/bin
+
+      # Install dependencies needed for building and tests
+      - npm install
+
+      # Upgrade AWS CLI to the latest version
+      - pip install --upgrade awscli
+
+  pre_build:
+    commands:
+      # Discover and run unit tests in the 'tests' directory
+      - npm test
+
+  build:
+    commands:
+      # Use AWS SAM to package the application
+      # TODO: build:prod hangs webpack when using CodeBuild. "92% chunk asset optimization TerserPlugin"
+      # See https://github.com/webpack-contrib/uglifyjs-webpack-plugin/issues/272
+      - npm run build:dev
+
+  post_build:
+    commands:
+      # Package and Deploy the sam application.
+      - sam package --s3-bucket $S3_BUCKET --output-template-file template.packaged.yaml
+      - sam deploy --template-file template.packaged.yaml --stack-name awscodestar-ddd-cqrs-es-sam --capabilities CAPABILITY_IAM --no-fail-on-empty-changeset --parameter-overrides environment=${environment} logLevel=${logLevel} eventLogTable=${eventLogTable} eventStream=${eventStream} setValidationsTable=${setValidationsTable} projectionUsersTable=${projectionUsersTable} projectionRolesTable=${projectionRolesTable}
+
+      # Do not remove this statement. This command is required for AWS CodeStar projects.
+      # Update the AWS Partition, AWS Region, account ID and project ID in the project ARN on template-configuration.json file so AWS CloudFormation can tag project resources.
+      - sed -i.bak 's/\$PARTITION\$/'${PARTITION}'/g;s/\$AWS_REGION\$/'${AWS_REGION}'/g;s/\$ACCOUNT_ID\$/'${ACCOUNT_ID}'/g;s/\$PROJECT_ID\$/'${PROJECT_ID}'/g' template-configuration.json
+
+artifacts:
+  type: zip
+  files:
+    - template-packaged.yaml
+    - template-configuration.json

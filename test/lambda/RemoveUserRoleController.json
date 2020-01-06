@@ -1,0 +1,85 @@
+{
+  "httpMethod": "DELETE",
+  "body": null,
+  "resource": "/users/{id}/roles/{roleId}",
+  "requestContext": {
+      "resourceId": "123456",
+      "apiId": "1234567890",
+      "resourcePath": "/users/{id}/roles/{roleId}",
+      "httpMethod": "DELETE",
+      "requestId": "c6af9ac6-7b61-11e6-9a41-93e8deadbeef",
+      "accountId": "123456789012",
+      "stage": "dev",
+      "identity": {
+          "apiKey": null,
+          "userArn": null,
+          "cognitoAuthenticationType": null,
+          "caller": null,
+          "userAgent": "Custom User Agent String",
+          "user": null,
+          "cognitoIdentityPoolId": null,
+          "cognitoAuthenticationProvider": null,
+          "sourceIp": "127.0.0.1",
+          "accountId": null
+      },
+      "extendedRequestId": null,
+      "path": "/users/{id}/roles/{roleId}"
+  },
+  "queryStringParameters": null,
+  "multiValueQueryStringParameters": null,
+  "headers": {
+      "Content-Type": "application/json",
+      "User-Agent": "PostmanRuntime/7.21.0",
+      "Accept": "*/*",
+      "Cache-Control": "no-cache",
+      "Postman-Token": "f611b5ca-e524-4162-94b4-98322aa11828",
+      "Host": "127.0.0.1:3000",
+      "Accept-Encoding": "gzip, deflate",
+      "Content-Length": "0",
+      "Connection": "keep-alive",
+      "X-Forwarded-Proto": "http",
+      "X-Forwarded-Port": "3000"
+  },
+  "multiValueHeaders": {
+      "Content-Type": [
+          "application/json"
+      ],
+      "User-Agent": [
+          "PostmanRuntime/7.21.0"
+      ],
+      "Accept": [
+          "*/*"
+      ],
+      "Cache-Control": [
+          "no-cache"
+      ],
+      "Postman-Token": [
+          "f611b5ca-e524-4162-94b4-98322aa11828"
+      ],
+      "Host": [
+          "127.0.0.1:3000"
+      ],
+      "Accept-Encoding": [
+          "gzip, deflate"
+      ],
+      "Content-Length": [
+          "0"
+      ],
+      "Connection": [
+          "keep-alive"
+      ],
+      "X-Forwarded-Proto": [
+          "http"
+      ],
+      "X-Forwarded-Port": [
+          "3000"
+      ]
+  },
+  "pathParameters": {
+      "id": "645bb243-73e6-4ffc-b660-67faff66b928",
+      "roleId": "145bb243-73e6-4ffc-b660-67faff66b928"
+  },
+  "stageVariables": null,
+  "path": "/users/645bb243-73e6-4ffc-b660-67faff66b928/roles/145bb243-73e6-4ffc-b660-67faff66b928",
+  "isBase64Encoded": false
+}

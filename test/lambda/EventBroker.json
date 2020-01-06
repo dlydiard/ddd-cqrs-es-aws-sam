@@ -1,0 +1,20 @@
+{
+  "Records": [
+    {
+      "kinesis": {
+        "kinesisSchemaVersion": "1.0",
+        "partitionKey": "645bb243-73e6-4ffc-b660-67faff66b927",
+        "sequenceNumber": "49602053746623107830810035974983776969620250614994829314",
+        "data": "eyIkbmFtZSI6Im9yZy9pYW0vdXNlci9yZWdpc3RlcmVkIiwiaWQiOiI2NDViYjI0My03M2U2LTRmZmMtYjY2MC02N2ZhZmY2NmI5MjgiLCIkdmVyc2lvbiI6MSwiZW1haWwiOiJkYW5AZG9tYWluLmNvbSIsInRpbWVzdGFtcCI6IjIwMTktMTItMzBUMDY6NTk6MDguNTEzWiJ9Cg==",
+        "approximateArrivalTimestamp": 1.57561331E9
+      },
+      "eventSource": "aws:kinesis",
+      "eventVersion": "1.0",
+      "eventID": "shardId-000000000000:00000000000000000001",
+      "eventName": "aws:kinesis:record",
+      "invokeIdentityArn": "arn:aws:iam::000000:role/test",
+      "awsRegion": "us-west-2",
+      "eventSourceARN": "arn:aws:kinesis:us-west-2:000000000:stream/event-source-stream/consumer/serverless-ddd-es-cqrs-aws-sam-EventBroker-W950NUAYZ6Y3:1577140656"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+.aws
+.aws-sam
+.env
+.vscode
+*.code-workspace
+coverage/
+node_modules/
+template.packaged.yaml

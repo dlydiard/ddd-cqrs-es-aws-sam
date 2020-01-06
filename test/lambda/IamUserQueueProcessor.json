@@ -1,0 +1,80 @@
+{
+  "Records": [
+    {
+      "messageId": "2eefa834-bab7-4054-9ed5-3f0910d1e75e",
+      "receiptHandle": "ABCDEFG123/dQ6A==",
+      "body": "{\"$name\":\"org/iam/user/registered\",\"id\":\"645bb243-73e6-4ffc-b660-67faff66b928\",\"$version\":1,\"email\":\"dan@domain.com\",\"timestamp\":\"2019-12-30T06:59:08.513Z\"}",
+      "attributes": {
+        "ApproximateReceiveCount": "1",
+        "SentTimestamp": "1577424353812",
+        "SequenceNumber": "18850564708285423616",
+        "MessageGroupId": "e8049cd5-d549-4ba0-9c9e-023638ea59af",
+        "SenderId": "ZROAXPUAJDDL5FGV2J1RK:serverless-ddd-es-cqrs-aws-sam-EventBroker-ABCDEFG",
+        "MessageDeduplicationId": "cf80102d-ab66-4c1f-88f9-5406a108b2dc",
+        "ApproximateFirstReceiveTimestamp": "1577424353812"
+      },
+      "messageAttributes": {},
+      "md5OfBody": "a54772c4bffa39e02daa52a8aa81d4ea",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-west-2:000000000:serverless-ddd-es-cqrs-aws-sam-IamUserQueue-ABCDEFG.fifo",
+      "awsRegion": "us-west-2"
+    },
+    {
+      "messageId": "3eefa834-bab7-4054-9ed5-3f0910d1e75e",
+      "receiptHandle": "ABCDEFG123/eQ6A==",
+      "body": "{\"$name\":\"org/iam/user/registered\",\"id\":\"745bb243-73e6-4ffc-b660-67faff66b928\",\"$version\":1,\"email\":\"dan2@domain.com\",\"timestamp\":\"2019-12-30T06:59:09.513Z\"}",
+      "attributes": {
+        "ApproximateReceiveCount": "1",
+        "SentTimestamp": "1577424353813",
+        "SequenceNumber": "18850564708285423617",
+        "MessageGroupId": "f8049cd5-d549-4ba0-9c9e-023638ea59af",
+        "SenderId": "ZROAXPUAJDDL5FGV2J1RK:serverless-ddd-es-cqrs-aws-sam-EventBroker-ABCDEFG",
+        "MessageDeduplicationId": "df80102d-ab66-4c1f-88f9-5406a108b2dc",
+        "ApproximateFirstReceiveTimestamp": "1577424353813"
+      },
+      "messageAttributes": {},
+      "md5OfBody": "a54772c4bffa39e02daa52a8aa81d4ea",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-west-2:000000000:serverless-ddd-es-cqrs-aws-sam-IamUserQueue-ABCDEFG.fifo",
+      "awsRegion": "us-west-2"
+    },
+    {
+      "messageId": "3eefa834-bab7-4054-9ed5-3f0910d1e75e",
+      "receiptHandle": "ABCDEFG123/dQ6A==",
+      "body": "{\"$name\":\"org/iam/user/updated\",\"id\":\"645bb243-73e6-4ffc-b660-67faff66b928\",\"$version\":2,\"firstName\":\"DanTwo\",\"lastName\":\"LastNameTwo\",\"timestamp\":\"2019-12-30T06:59:09.513Z\"}",
+      "attributes": {
+        "ApproximateReceiveCount": "1",
+        "SentTimestamp": "1577424353812",
+        "SequenceNumber": "18850564708285423617",
+        "MessageGroupId": "38049cd5-d549-4ba0-9c9e-023638ea59af",
+        "SenderId": "ZROAXPUAJDDL5FGV2J1RK:serverless-ddd-es-cqrs-aws-sam-EventBroker-ABCDEFG",
+        "MessageDeduplicationId": "cf80102d-ab66-4c1f-88f9-5406a108b2dc",
+        "ApproximateFirstReceiveTimestamp": "1577424353812"
+      },
+      "messageAttributes": {},
+      "md5OfBody": "a54772c4bffa39e02daa52a8aa81d4ea",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-west-2:000000000:serverless-ddd-es-cqrs-aws-sam-IamUserQueue-ABCDEFG.fifo",
+      "awsRegion": "us-west-2"
+    },
+    {
+      "messageId": "4eefa834-bab7-4054-9ed5-3f0910d1e75e",
+      "receiptHandle": "ABCDEFG123/dQ6A==",
+      "body": "{\"$name\":\"org/iam/user/roleAdded\",\"id\":\"645bb243-73e6-4ffc-b660-67faff66b928\",\"$version\":3,\"roleId\":\"145bb243-73e6-4ffc-b660-67faff66b928\", \"enrichmentData\": [ { \"aggregateName\": \"User\", \"data\": { \"id\": \"645bb243-73e6-4ffc-b660-67faff66b928\", \"firstName\": \"Dan\", \"lastName\": \"MyLastName\", \"email\": \"dan@domain.com\" } }, { \"aggregateName\": \"Role\", \"data\": { \"id\": \"145bb243-73e6-4ffc-b660-67faff66b928\", \"name\": \"Admin\" } }], \"timestamp\":\"2019-12-30T06:59:10.513Z\"}",
+      "attributes": {
+        "ApproximateReceiveCount": "1",
+        "SentTimestamp": "1577424353812",
+        "SequenceNumber": "18850564708285423616",
+        "MessageGroupId": "e8049cd5-d549-4ba0-9c9e-023638ea59af",
+        "SenderId": "ZROAXPUAJDDL5FGV2J1RK:serverless-ddd-es-cqrs-aws-sam-EventBroker-ABCDEFG",
+        "MessageDeduplicationId": "cf80102d-ab66-4c1f-88f9-5406a108b2dc",
+        "ApproximateFirstReceiveTimestamp": "1577424353812"
+      },
+      "messageAttributes": {},
+      "md5OfBody": "a54772c4bffa39e02daa52a8aa81d4ea",
+      "eventSource": "aws:sqs",
+      "eventSourceARN": "arn:aws:sqs:us-west-2:000000000:serverless-ddd-es-cqrs-aws-sam-IamUserQueue-ABCDEFG.fifo",
+      "awsRegion": "us-west-2"
+    }
+  ]
+}

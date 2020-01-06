@@ -1,0 +1,18 @@
+version: '3'
+services:
+  localstack:
+    image: "localstack/localstack"
+    ports:
+      - "4567:4567"
+      - "4568:4568"
+      - "4574:4574"
+      - "4576:4576"
+      - "4582:4582"
+      - "4586:4586"
+      - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
+    environment:
+      - PORT_WEB_UI=${PORT_WEB_UI- }
+      - SERVICES=kinesis,apigateway,lambda,sqs
+      - DEFAULT_REGION=us-west-2
+      - DATA_DIR=/tmp/localstack/data
+      - TMPDIR=/private${TMPDIR- }
