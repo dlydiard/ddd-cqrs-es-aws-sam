@@ -251,6 +251,7 @@ class UserService
 ```
 
 ```typescript
+// role.handler.ts
 @HandlesEvent(RoleCreated)
 @HandlesEvent(RoleDisabled)
 @HandlesEvent(UserUpdated)
