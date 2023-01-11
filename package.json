@@ -24,7 +24,7 @@
     "@node-ts/logger-winston": "^0.1.0",
     "aws-sdk": "^2.580.0",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.11.0",
+    "class-validator": "^0.14.0",
     "http-status-codes": "^1.4.0",
     "inversify": "^5.0.1",
     "reflect-metadata": "^0.1.13",
